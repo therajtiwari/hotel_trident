@@ -2,6 +2,7 @@ import React from "react";
 import { FiFacebook, FiTwitter, FiInstagram } from "react-icons/fi";
 
 import { FooterOverlay, Newsletter } from "../../components";
+import BookTable from "../../components/Footer/BookTable";
 import { images } from "../../constants";
 import "./Footer.css";
 
@@ -9,6 +10,7 @@ const Footer = () => (
   <div className="app__footer section__padding" id="login">
     <FooterOverlay />
     <Newsletter />
+    <BookTable/>
 
     <div className="app__footer-links">
       <div className="app__footer-links_contact">

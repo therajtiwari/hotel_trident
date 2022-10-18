@@ -1,13 +1,64 @@
-import React from "react";
+import React,{useState} from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import images from "../../constants/images";
 import "./Navbar.css";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+
+function BookTableModal() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Launch static backdrop modal
+      </Button>
+
+      <Modal
+      style={{zIndex:-2}}
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          I will not close if you click outside me. Don't even try to press
+          escape key.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
+
+
+
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
+  const [bookTabModal, showBookTabModal] = React.useState(false);
+
+  
+
   return (
+
+    <>
     <nav className="app__navbar">
+      
       <div className="app__navbar-logo">
         <img src={images.gericht} alt="app__logo" />
       </div>
@@ -28,12 +79,18 @@ const Navbar = () => {
           <a href="#contact">Contact</a>
         </li>
       </ul>
-      <div className="app__navbar-login">
+      <div >
         {/* <a href="#login" className="p__opensans">Log In / Registration</a>
         <div /> */}
-        <a href="/" className="p__opensans">
-          Book Table
-        </a>
+        <ul className="app__navbar-links">
+          <li className="p__opensans"  >
+            <a href="#bookTab">Book Table</a>
+            
+          </li>
+
+        </ul>
+        
+        
       </div>
       <div className="app__navbar-smallscreen">
         <GiHamburgerMenu
@@ -79,6 +136,11 @@ const Navbar = () => {
         )}
       </div>
     </nav>
+
+    {
+      bookTabModal && <BookTableModal />
+    }
+    </>
   );
 };
 
